@@ -24,13 +24,13 @@ def test_all():
     for i in d:
         assert(d[i]==cal(*i))
 
-test_all()
 
 
-while True:
-    x=input('from(all type enter to quit)')
-    y=input('to=')
-    z=input('amount=')
-    if (x,y,z)==('','',''):
-        break
-    print(cal(x,y,z))
+if __name__=='__main__':
+    while True:
+        x=input('from(all type enter to quit)')
+        y=input('to=')
+        z=input('amount=')
+        if (x,y,z)==('','',''):
+            break
+        print(cal(x,y,z))
