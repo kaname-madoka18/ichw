@@ -23,6 +23,7 @@ d={('USD', 'EUR', '2.36'): 2.03802284,('JPY', 'USD', '12356'): 110.9166150504,
 def test_all():
     for i in d:
         assert(d[i]==cal(*i))
+    print('all test passed!')
 
 
 
