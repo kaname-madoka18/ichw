@@ -26,6 +26,7 @@ a1server.php?from=%s&to=%s&amt=%s" % (x, y, z)
         return get['error']
 
 
+<<<<<<< HEAD
 def get_test_data():                # 测试数据库
     d = {
         ('USD', 'EUR', '2.36'): 2.03802284,
@@ -38,6 +39,12 @@ def get_test_data():                # 测试数据库
         ('USD', 'EUR', '25a'): 'Currency amount is invalid.'
         }
     return d
+=======
+def test_all():
+    for i in d:
+        assert(d[i]==cal(*i))
+    print('all test passed!')
+>>>>>>> d30017a16cb89c8da3ff0212d0c1c2bdd827a4a4
 
 
 def test_all():                     # 测试函数
