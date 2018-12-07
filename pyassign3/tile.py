@@ -12,9 +12,11 @@ __email__  = "1800011835@pku.edu.cn"
 import turtle
 
 
-def get_rect(a, b, m, n, i):    # i,a,b,m,n分别为左上顶点位置代号、
-    t = tuple()                   # 长方形的横向跨度、纵向跨度、
-    p, q = divmod(i, m)         # 大长方形的长和宽
+def get_rect(a, b, m, n, i):
+    # i,a,b,m,n分别为左上顶点位置代号、
+    # 长方形的横向跨度、纵向跨度、大长方形的长和宽
+    t = tuple()
+    p, q = divmod(i, m)
     if q+a <= m and p+b <= n:
         for k in range(b):
             t += tuple(range(i, i+a))
