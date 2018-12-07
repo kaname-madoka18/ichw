@@ -86,7 +86,6 @@ def main():             # 分类讨论正方形和长方形
             )
     else:
         if m % a == 0 and n % a == 0:
-            t = True
             result = []
             for i in range(n//a):
                 for u in range(m//a):
