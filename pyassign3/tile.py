@@ -56,18 +56,20 @@ def draw(results, m, n):       # 用turtle进行可视化
     bob = turtle.Turtle()
     ln = len(results)
     while True:
-        need = turtle.textinput('which you want to draw?',
-                            'input a interger from 1 to {}\
-                                (input nothing to quit):'.format(ln))
+        need = turtle.textinput(
+            'which you want to draw?',
+            'input a interger from 1 to {}\
+            (input nothing to quit):'.format(ln)
+            )
         bob.reset()
         if need == '':
             return 0
         elif not need.isdigit():
-            bob.write('invalid input',font = ("Arial", 20, "normal"))
+            bob.write('invalid input', font=("Arial", 20, "normal"))
             continue
         need = int(need)-1
         if need >= ln:
-            bob.write('invalid input',font = ("Arial", 20, "normal"))
+            bob.write('invalid input', font=("Arial", 20, "normal"))
             continue
         grl = results[need]
         bob.speed(0)
@@ -81,15 +83,15 @@ def draw(results, m, n):       # 用turtle进行可视化
             bob.penup()
             bob.goto(-200+0.5*para, 200-(i-0.5)*para)
             for u in range(m):
-                bob.write('%s'%int(m*(i-1)+u),
-                          align = 'center',
-                          font = ("Arial", 10, "normal"))
+                bob.write('%s' % int(m*(i-1)+u),
+                          align='center',
+                          font=("Arial", 10, "normal"))
                 bob.fd(para)
             bob.goto(-200, 200-i*para)
         bob.pendown()
         bob.fd(400)
         bob.penup()
-        bob.goto(-200,200)
+        bob.goto(-200, 200)
         bob.rt(90)
         width = para*n
         for i in range(1, m+2):
@@ -117,7 +119,7 @@ def draw(results, m, n):       # 用turtle进行可视化
                 bob.fd(para*dy)
                 bob.rt(90)
             bob.penup()         # draw the bricks
-    
+
 
 def main():             # 分类讨论正方形和长方形
     m = int(input('length of wall = '))
