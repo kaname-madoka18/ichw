@@ -51,27 +51,73 @@ def put_in(start, abmni, total, results):
     return results
 
 
-def draw(grl, m):       # 用turtle进行可视化
+def draw(results, m, n):       # 用turtle进行可视化
     para = 400/m
     bob = turtle.Turtle()
-    bob.speed(0)
-    bob.penup()
-    bob.goto(-200, 100)
-    for i in grl:
-        lu, rd = i[0], i[-1]
-        y, x = divmod(lu, m)
-        bob.goto(para*x-200, 100-para*y)
-        dy, dx = divmod(rd-lu, m)
-        dy += 1
-        dx += 1
-        bob.pendown()
-        for k in range(2):
-            bob.fd(para*dx)
-            bob.rt(90)
-            bob.fd(para*dy)
-            bob.rt(90)
+    ln = len(results)
+    while True:
+        need = turtle.textinput('which you want to draw?',
+                            'input a interger from 1 to {}\
+                                (input nothing to quit):'.format(ln))
+        bob.reset()
+        if need == '':
+            return 0
+        elif not need.isdigit():
+            bob.write('invalid input',font = ("Arial", 20, "normal"))
+            continue
+        need = int(need)-1
+        if need >= ln:
+            bob.write('invalid input',font = ("Arial", 20, "normal"))
+            continue
+        grl = results[need]
+        bob.speed(0)
         bob.penup()
 
+        bob.goto(-200, 200)
+        bob.pencolor('blue')
+        for i in range(1, n+1):
+            bob.pendown()
+            bob.fd(400)
+            bob.penup()
+            bob.goto(-200+0.5*para, 200-(i-0.5)*para)
+            for u in range(m):
+                bob.write('%s'%int(m*(i-1)+u),
+                          align = 'center',
+                          font = ("Arial", 10, "normal"))
+                bob.fd(para)
+            bob.goto(-200, 200-i*para)
+        bob.pendown()
+        bob.fd(400)
+        bob.penup()
+        bob.goto(-200,200)
+        bob.rt(90)
+        width = para*n
+        for i in range(1, m+2):
+            bob.pendown()
+            bob.fd(width)
+            bob.penup()
+            bob.goto(-200+i*para, 200)
+        bob.lt(90)              # draw the based wall
+
+        bob.penup()
+        bob.goto(-200, 200)
+        bob.pensize(5)
+        bob.pencolor('black')
+        for i in grl:
+            lu, rd = i[0], i[-1]
+            y, x = divmod(lu, m)
+            bob.goto(para*x-200, 200-para*y)
+            dy, dx = divmod(rd-lu, m)
+            dy += 1
+            dx += 1
+            bob.pendown()
+            for k in range(2):
+                bob.fd(para*dx)
+                bob.rt(90)
+                bob.fd(para*dy)
+                bob.rt(90)
+            bob.penup()         # draw the bricks
+    
 
 def main():             # 分类讨论正方形和长方形
     m = int(input('length of wall = '))
@@ -86,6 +132,7 @@ def main():             # 分类讨论正方形和长方形
             )
     else:
         if m % a == 0 and n % a == 0:
+            t = True
             result = []
             for i in range(n//a):
                 for u in range(m//a):
@@ -99,8 +146,7 @@ def main():             # 分类讨论正方形和长方形
     else:
         for i in range(num):
             print(i+1, results[i])
-        need = int(input('which you want to draw(input a interger)'))-1
-        draw(results[need], m)
+        draw(results, m, n)
 
 
 if __name__ == '__main__':
