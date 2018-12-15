@@ -26,7 +26,7 @@ def get_rect(a, b, m, n, i):
     return t
 
 
-def put_in(start, abmni, total, results):
+def put_in(start, abmni, total, results, occ0):
     # abmni为get_rect函数的参数元组
     # start为已铺好的瓷砖（由元组表示）组成的列表
     # total是格子总数m*n,
@@ -36,18 +36,17 @@ def put_in(start, abmni, total, results):
     t = get_rect(a, b, m, n, i)
     if t:
         now0 = start+[t]
-        occ0 = []
-        for k in now0:
-            occ0.extend(k)
+        occ0 += tuple(t)
         occ = set(occ0)
         s = len(occ)
-        if s == total:
-            results.append(now0)
-        elif len(occ0) == s:
-            uno = set(range(total))-occ
-            i = min(uno)
-            put_in(now0, (a, b, m, n, i), total, results)
-            put_in(now0, (b, a, m, n, i), total, results)
+        if len(occ0) == s:
+            if s == total:
+                results.append(now0)
+            else:
+                uno = set(range(total))-occ
+                i = min(uno)
+                put_in(now0, (a, b, m, n, i), total, results, occ0)
+                put_in(now0, (b, a, m, n, i), total, results, occ0)
     return results
 
 
@@ -127,10 +126,12 @@ def main():             # 分类讨论正方形和长方形
     a = int(input('length of brick = '))
     b = int(input('width of brick = '))
     total = n*m
-    if a != b:
+    if (n*m) % (a*b) != 0:
+        results = []
+    elif a != b:
         results = (
-            put_in([], (a, b, m, n, 0), total, []) +
-            put_in([], (b, a, m, n, 0), total, [])
+            put_in([], (a, b, m, n, 0), total, [], tuple()) +
+            put_in([], (b, a, m, n, 0), total, [], tuple())
             )
     else:
         if m % a == 0 and n % a == 0:
@@ -146,8 +147,10 @@ def main():             # 分类讨论正方形和长方形
     if num == 0:
         print('None')
     else:
-        for i in range(num):
-            print(i+1, results[i])
+        initial = 0
+        for i in results:
+            initial += 1
+            print(initial, i)
         draw(results, m, n)
 
 
