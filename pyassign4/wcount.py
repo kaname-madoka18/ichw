@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 
 """wcount.py: count words from an Internet file.
 
@@ -15,7 +15,7 @@ import string
 
 def wcount(lines, topn=10):
     """count words from lines of text string, then sort by their counts
-    in reverse order, output the topn (word count), each in one line. 
+    in reverse order, output the topn (word count), each in one line.
     """
     dcount = defaultdict(int)
     for line in lines.splitlines():
@@ -23,16 +23,16 @@ def wcount(lines, topn=10):
         for word in lst:
             word = word.lower()
             dcount[word] += 1
-    sor = sorted(dcount.items(), key=lambda t:t[1], reverse=True)
-    if len(sor)>=topn:
+    sor = sorted(dcount.items(), key=lambda t: t[1], reverse=True)
+    if len(sor) >= topn:
         top = sor[:topn]
     else:
         top = sor
     for u in top:
         print("{}\t{}".format(*u))
 
-    
-def openbook(url):
+
+def openbook(url):          # 打开文件并解码为UTF-8 字符串
     try:
         with urlopen(url) as book:
             doc = book.read()
@@ -50,7 +50,7 @@ def openbook(url):
         return False
 
 
-def main():
+def main():             # 计数单词出现次数
     paras = sys.argv[1:]
     if len(paras) == 1:
         url = paras[0]
@@ -66,8 +66,9 @@ def main():
     else:
         print('Usage: {} url [topn]'.format(sys.argv[0]))
         print('  url: URL of the txt file to analyze ')
-        print('  topn: how many (words count) to output. If not given, will output top 10 words')
+        print('  topn: how many (words count) to output. \
+If not given, will output top 10 words')
         sys.exit(1)
-    
+
 if __name__ == '__main__':
     main()
