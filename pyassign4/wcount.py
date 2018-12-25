@@ -43,7 +43,7 @@ def openbook(url):          # 打开文件并解码为UTF-8 字符串
         print("Invalid format of URL")
         return False
     except UnicodeDecodeError:
-        print("decode error we decode your input via ascii")
+        print("decode error we decode your input via UTF-8")
         return False
     except:
         print("Unprospective error")
